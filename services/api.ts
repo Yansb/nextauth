@@ -51,9 +51,6 @@ api.interceptors.response.use(response => {
           failedRequestsQueue.forEach(request => request.reject(err));
           failedRequestsQueue = [];
 
-          if(process.browser){
-            signOut();
-          }
         }).finally(() => {
           isRefresing = false;
 
@@ -77,7 +74,6 @@ api.interceptors.response.use(response => {
       
     }else{
       if(process.browser){
-        signOut();
       } else{
         return Promise.reject(new AuthTokenError())
       }
