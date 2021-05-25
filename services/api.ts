@@ -50,6 +50,10 @@ api.interceptors.response.use(response => {
         }).catch(err => {
           failedRequestsQueue.forEach(request => request.reject(err));
           failedRequestsQueue = [];
+          if(process.browser){
+
+            signOut();
+          }
 
         }).finally(() => {
           isRefresing = false;
